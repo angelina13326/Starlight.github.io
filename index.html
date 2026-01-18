@@ -1,1 +1,798 @@
-<h1>test</h1>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STARLIGHT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1e40af;
+            --dark-color: #0f172a;
+            --light-color: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--light-color);
+            overflow-x: hidden;
+        }
+        
+        .starlight-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .starlight-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: starlightAppear 3s ease-out forwards, starlightFloat 2s ease-in-out 3s forwards;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+        
+        @keyframes starlightAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes starlightFloat {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0.8;
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 1s ease-in-out forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px);
+            }
+        }
+        
+        .website-container {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .website-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        .feature-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .footer {
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .starlight-text {
+                font-size: 4rem;
+                letter-spacing: 0.1em;
+            }
+            
+            @keyframes starlightFloat {
+                0% {
+                    transform: translateY(0);
+                }
+                100% {
+                    transform: translateY(-50px);
+                    opacity: 0.8;
+                }
+            }
+            
+            .fade-out {
+                animation: fadeOutMobile 1s ease-in-out forwards;
+            }
+            
+            @keyframes fadeOutMobile {
+                0% {
+                    opacity: 1;
+                    transform: translateY(-50px);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px);
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starlight Animation Container -->
+    <div class="starlight-container" id="starlightContainer">
+        <h1 class="starlight-text" id="starlightText">STARLIGHT</h1>
+    </div>
+
+    <!-- Website Container -->
+    <div class="website-container" id="websiteContainer">
+        <!-- Navigation -->
+        <nav class="navbar fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="star" class="w-8 h-8 text-blue-500"></i>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">STARLIGHT</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button class="text-gray-300 hover:text-white" id="mobileMenuBtn">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden bg-gray-900 mt-4 rounded-lg shadow-lg p-4" id="mobileMenu">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero-section flex items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto text-center relative z-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Welcome to <span class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">STARLIGHT</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Illuminating the digital landscape with innovative solutions and creative excellence
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-primary px-8 py-3 rounded-lg font-semibold text-white">
+                        Explore Our Work
+                    </button>
+                    <button class="px-8 py-3 rounded-lg font-semibold border border-blue-500 text-blue-400 hover:bg-blue-500/10 transition-colors">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="px-4 sm:px-6 lg:px-8 py-20">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">About <span class="text-blue-400">STARLIGHT</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-blue-400">Our Story</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Founded in 2020, STARLIGHT emerged from a passion for creating exceptional digital experiences. 
+                            We believe in the power of technology to transform businesses and connect people.
+                        </p>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Our team of experts combines technical excellence with creative vision to deliver 
+                            solutions that not only meet but exceed our clients' expectations.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center">
+                                <i data-lucide="users" class="w-5 h-5 text-blue-400 mr-2"></i>
+                                <span>50+ Team Members</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="briefcase" class="w-5 h-5 text-blue-400 mr-2"></i>
+                                <span>200+ Projects</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="globe" class="w-5 h-5 text-blue-400 mr-2"></i>
+                                <span>25+ Countries</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-6 rounded-lg border border-blue-500/30">
+                                <i data-lucide="code" class="w-8 h-8 text-blue-400 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Web Development</h4>
+                                <p class="text-sm text-gray-400">Modern, responsive websites and web applications</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-6 rounded-lg border border-purple-500/30">
+                                <i data-lucide="smartphone" class="w-8 h-8 text-purple-400 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Mobile Apps</h4>
+                                <p class="text-sm text-gray-400">iOS and Android applications with native performance</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 mt-8">
+                            <div class="bg-gradient-to-br from-pink-500/20 to-red-500/20 p-6 rounded-lg border border-pink-500/30">
+                                <i data-lucide="palette" class="w-8 h-8 text-pink-400 mb-4"></i>
+                                <h4 class="font-semibold mb-2">UI/UX Design</h4>
+                                <p class="text-sm text-gray-400">Beautiful and intuitive user experiences</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-500/20 to-blue-500/20 p-6 rounded-lg border border-green-500/30">
+                                <i data-lucide="zap" class="w-8 h-8 text-green-400 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Digital Marketing</h4>
+                                <p class="text-sm text-gray-400">Strategies to grow your online presence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="px-4 sm:px-6 lg:px-8 py-20 bg-gray-900/50">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our <span class="text-blue-400">Services</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Comprehensive digital solutions tailored to your business needs
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="feature-card rounded-xl p-8">
+                        <div class="w-16 h-16 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6">
+                            <i data-lucide="laptop" class="w-8 h-8 text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Web Development</h3>
+                        <p class="text-gray-400 mb-6">
+                            Custom websites and web applications built with modern technologies for optimal performance and scalability.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                Responsive Design
+                            </li>
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                E-commerce Solutions
+                            </li>
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                CMS Integration
+                            </li>
+                        </ul>
+                        <a href="#" class="text-blue-400 hover:text-blue-300 font-medium flex items-center">
+                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Service Card 2 -->
+                    <div class="feature-card rounded-xl p-8">
+                        <div class="w-16 h-16 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6">
+                            <i data-lucide="smartphone" class="w-8 h-8 text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Mobile Development</h3>
+                        <p class="text-gray-400 mb-6">
+                            High-performance mobile applications for iOS and Android platforms with seamless user experiences.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                Native Apps
+                            </li>
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                Cross-Platform Solutions
+                            </li>
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                API Integration
+                            </li>
+                        </ul>
+                        <a href="#" class="text-purple-400 hover:text-purple-300 font-medium flex items-center">
+                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Service Card 3 -->
+                    <div class="feature-card rounded-xl p-8">
+                        <div class="w-16 h-16 bg-pink-500/20 rounded-lg flex items-center justify-center mb-6">
+                            <i data-lucide="palette" class="w-8 h-8 text-pink-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">UI/UX Design</h3>
+                        <p class="text-gray-400 mb-6">
+                            Creative and user-centric design solutions that enhance user engagement and drive conversions.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                User Research
+                            </li>
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                Wireframing &amp; Prototyping
+                            </li>
+                            <li class="flex items-center text-sm text-gray-300">
+                                <i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i>
+                                Visual Design
+                            </li>
+                        </ul>
+                        <a href="#" class="text-pink-400 hover:text-pink-300 font-medium flex items-center">
+                            Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="px-4 sm:px-6 lg:px-8 py-20">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our <span class="text-blue-400">Work</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Explore our portfolio of successful projects
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Portfolio Item 1 -->
+                    <div class="group relative overflow-hidden rounded-xl">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-xl overflow-hidden">
+                            <div class="w-full h-64 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                                <i data-lucide="monitor" class="w-16 h-16 text-blue-400/50"></i>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">E-commerce Platform</h3>
+                            <p class="text-sm text-gray-300 mb-4">Complete online shopping solution with payment integration</p>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 font-medium flex items-center">
+                                View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 2 -->
+                    <div class="group relative overflow-hidden rounded-xl">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-xl overflow-hidden">
+                            <div class="w-full h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                                <i data-lucide="smartphone" class="w-16 h-16 text-purple-400/50"></i>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Fitness App</h3>
+                            <p class="text-sm text-gray-300 mb-4">Mobile application for tracking workouts and nutrition</p>
+                            <a href="#" class="text-purple-400 hover:text-purple-300 font-medium flex items-center">
+                                View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 3 -->
+                    <div class="group relative overflow-hidden rounded-xl">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-xl overflow-hidden">
+                            <div class="w-full h-64 bg-gradient-to-br from-pink-500/20 to-orange-500/20 flex items-center justify-center">
+                                <i data-lucide="globe" class="w-16 h-16 text-pink-400/50"></i>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Corporate Website</h3>
+                            <p class="text-sm text-gray-300 mb-4">Modern website for a multinational corporation</p>
+                            <a href="#" class="text-pink-400 hover:text-pink-300 font-medium flex items-center">
+                                View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="btn-primary px-8 py-3 rounded-lg font-semibold text-white">
+                        View All Projects
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="px-4 sm:px-6 lg:px-8 py-20 bg-gray-900/50">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">Get in <span class="text-blue-400">Touch</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Ready to start your project? Contact us today for a consultation
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-6 h-6 text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Location</h4>
+                                    <p class="text-gray-400">123 Innovation Drive, Tech City, TC 10101</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-lucide="mail" class="w-6 h-6 text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Email</h4>
+                                    <p class="text-gray-400">info@starlightcompany.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-pink-500/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-lucide="phone" class="w-6 h-6 text-pink-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Phone</h4>
+                                    <p class="text-gray-400">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="social-icon w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-blue-500/20 transition-colors">
+                                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                                </a>
+                                <a href="#" class="social-icon w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-blue-400/20 transition-colors">
+                                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                                </a>
+                                <a href="#" class="social-icon w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-pink-500/20 transition-colors">
+                                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                                </a>
+                                <a href="#" class="social-icon w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-blue-600/20 transition-colors">
+                                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-6">Send us a message</h3>
+                        
+                        <form class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                                    <input type="email" id="email" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full px-6 py-3 rounded-lg font-semibold text-white">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer px-4 sm:px-6 lg:px-8 py-12">
+            <div class="container mx-auto">
+                <div class="grid md:grid-cols-4 gap-8 mb-12">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-6">
+                            <i data-lucide="star" class="w-8 h-8 text-blue-500"></i>
+                            <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">STARLIGHT</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">
+                            Illuminating the digital landscape with innovative solutions and creative excellence.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="facebook" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+                            <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">Services</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Web Development</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Mobile Development</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">UI/UX Design</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Digital Marketing</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">E-commerce Solutions</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                        <p class="text-gray-400 mb-4">
+                            Subscribe to our newsletter for the latest updates and insights.
+                        </p>
+                        <form class="space-y-3">
+                            <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            <button type="submit" class="btn-primary w-full px-4 py-2 rounded-lg font-medium text-white">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-8">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                            © 2024 STARLIGHT. All rights reserved.
+                        </p>
+                        <div class="flex space-x-6">
+                            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+                            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Animation sequence - simplified version that works locally
+        document.addEventListener('DOMContentLoaded', function() {
+            const starlightContainer = document.getElementById('starlightContainer');
+            const starlightText = document.getElementById('starlightText');
+            const websiteContainer = document.getElementById('websiteContainer');
+            
+            // Ensure elements are found
+            if (!starlightContainer || !starlightText || !websiteContainer) {
+                console.error('Required elements not found');
+                return;
+            }
+            
+            console.log('Animation sequence started');
+            
+            // Faster animation for testing
+            setTimeout(() => {
+                console.log('Starting fade out');
+                starlightText.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    console.log('Hiding starlight container and showing website');
+                    starlightContainer.style.display = 'none';
+                    websiteContainer.classList.add('visible');
+                }, 1000);
+            }, 3000); // Reduced duration for faster testing
+        });
+        
+        // Initialize Lucide icons if available
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                    
+                    // Scroll to target
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Form submission handlers
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+        
+        document.querySelector('footer form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+        });
+        
+        // Button click handlers
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.textContent.trim();
+                
+                if (buttonText === 'Explore Our Work') {
+                    document.querySelector('#portfolio').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else if (buttonText === 'Contact Us') {
+                    document.querySelector('#contact').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else if (buttonText === 'View All Projects') {
+                    alert('Redirecting to complete portfolio...');
+                }
+            });
+        });
+    </script>
+
+</body></html>
